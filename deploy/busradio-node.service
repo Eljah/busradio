@@ -1,0 +1,21 @@
+[Unit]
+Description=BusRadio offline onboard player
+After=network.target gpsd.service
+[Service]
+User=busradio
+Group=busradio
+SupplementaryGroups=gpio
+WorkingDirectory=/var/lib/busradio
+EnvironmentFile=/etc/busradio/node.env
+ExecStart=/usr/bin/java -Xmx256m -jar /opt/busradio/busradio.jar node /etc/busradio/node.properties
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/busradio
+UMask=0077
+TimeoutStopSec=20
+[Install]
+WantedBy=multi-user.target

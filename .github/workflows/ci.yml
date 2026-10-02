@@ -1,0 +1,42 @@
+name: Java acceptance tests
+on:
+  push:
+    paths: ["pom.xml", "src/**", ".github/workflows/ci.yml"]
+  pull_request:
+    paths: ["pom.xml", "src/**", ".github/workflows/ci.yml"]
+concurrency:
+  group: busradio-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [portable, pi]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Build and run acceptance tests (never emit RF)
+        shell: bash
+        run: |
+          if [ "${{ matrix.profile }}" = pi ]; then
+            mvn -B -Ppi clean verify
+          else
+            mvn -B clean verify
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: busradio-${{ matrix.profile }}
+          path: |
+            target/busradio.jar
+            build/test-results.json
+            build/test-results.xml
