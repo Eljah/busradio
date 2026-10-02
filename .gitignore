@@ -1,0 +1,8 @@
+target/
+build/
+var/
+*.log
+*.local.properties
+.env
+.idea/
+*.iml
