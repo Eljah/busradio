@@ -1,0 +1,14 @@
+#!/bin/sh
+# Install root:root 0755; parent dirs, config and native binary MUST NOT be writable by busradio.
+# Narrow privileged boundary: fixed program, fixed stdin input, root-controlled frequency.
+set -eu
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+export PATH
+[ "$(id -u)" = 0 ] || { echo "root helper only" >&2; exit 77; }
+[ "$#" = 8 ] || exit 64
+[ "$1" = '-freq' ] && [ "$3" = '-audio' ] && [ "$4" = '-' ] || exit 64
+[ "$5" = '-ps' ] && [ "$6" = 'BUSRADIO' ] && [ "$7" = '-rt' ] && [ "$8" = 'BusRadio onboard audio' ] || exit 64
+approved=$(cat /etc/busradio/fm-frequency)
+[ -n "$approved" ] && [ "$2" = "$approved" ] || { echo "Frequency not approved in root-owned config" >&2; exit 77; }
+case "$2" in *[!0-9.]*|'') exit 64;; esac
+exec /usr/bin/flock -n /run/lock/busradio-fm.lock /usr/local/bin/pi_fm_rds -freq "$2" -audio - -ps BUSRADIO -rt 'BusRadio onboard audio'
