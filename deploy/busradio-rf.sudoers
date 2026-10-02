@@ -1,0 +1,3 @@
+# Install with visudo -cf validation to /etc/sudoers.d/busradio-rf (root:root 0440).
+# No SETENV, no general shell or arbitrary binary privilege.
+busradio ALL=(root) NOPASSWD: /usr/local/sbin/busradio-fm-wrapper
