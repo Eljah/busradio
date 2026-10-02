@@ -1,0 +1,21 @@
+[Unit]
+Description=Busradio administration and content server
+After=network.target
+[Service]
+Type=simple
+User=busradio-server
+Group=busradio-server
+WorkingDirectory=/opt/busradio
+EnvironmentFile=/etc/busradio/server.env
+ExecStart=/usr/bin/java -Xms64m -Xmx512m -jar /opt/busradio/busradio-server-0.1.0-all.jar
+Restart=on-failure
+RestartSec=10
+StateDirectory=busradio-server
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/busradio-server
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,42 @@
+Java 21.0.11
+Passed: 38
+Failed: 0
+strict JSON round-trip
+JSON duplicate keys rejected
+JSON trailing input rejected
+JSON non-finite numbers rejected
+invalid geographic coordinates rejected
+overnight window and exclusive end
+buscrawl tuple order and two directions
+buscrawl missing order never joins across gap
+buscrawl movement source time and speed conversion
+GPSD uncertainty and no-fix fail closed
+release includes outbound and return
+signed manifest tampering rejected
+wrong pinned signing key rejected
+nearest forward advertisement wins
+passed business is excluded
+opposite direction is excluded
+stale and off-route GPS suppress advertisements
+advertisement must fit full remaining window
+expired campaign is excluded
+direction reverses and is retained at stops
+frequency caps survive edge restart
+admin authentication required
+admin session and CSRF enforcement
+device token cannot access another bus
+HTTP range download and unsatisfiable range
+unpublished content is not accessible to devices
+real FFmpeg audio normalization
+resume partial download and atomic activation
+offline playback preserves exact window and ad order
+at-least-once reports produce no duplicate server events
+corrupt replacement cannot replace last good release
+validly signed old release cannot roll back cache
+missing cached file repairs without discarding signing trust
+missing GPS substitutes filler, never unrelated advertisements
+network policy fails closed outside configured night hours
+FM output requires explicit authorization and real hardware
+journal reopens and discards only incomplete final append
+one continuous native-process PCM stream
+{}

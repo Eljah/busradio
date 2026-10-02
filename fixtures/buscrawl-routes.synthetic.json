@@ -1,0 +1,5 @@
+{
+  "nbusstop": {"1": ["Synthetic stop A", 49.10, 55.80], "2": ["Synthetic stop B", 49.12, 55.80]},
+  "bus": {"7": [null, "65", null, null, null, 0]},
+  "route": {"a": [7, 2, 0, 1], "b": [7, 1, 0, 0], "c": [7, 2, 1, 0], "d": [7, 1, 1, 1]}
+}

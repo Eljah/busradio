@@ -1,0 +1,11 @@
+# Insert in an HTTPS virtual host with your certificates; this file does not provision TLS.
+# Keep Java bound to 127.0.0.1. Set BR_PUBLIC_ORIGIN to the exact public HTTPS origin.
+location / {
+    proxy_pass http://127.0.0.1:8080;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Proto https;
+    client_max_body_size 256m;
+    client_body_timeout 60s;
+    proxy_read_timeout 180s;
+    proxy_send_timeout 180s;
+}

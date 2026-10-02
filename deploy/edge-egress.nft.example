@@ -1,0 +1,9 @@
+# EXAMPLE ONLY. Review your existing firewall and real interface/UID first.
+# Replace 991 with `id -u busradio-edge`. Do not flush existing rules.
+# This rejects non-Wi-Fi network egress for the edge process, including a cellular default route.
+table inet busradio_edge {
+    chain output {
+        type filter hook output priority 0; policy accept;
+        meta skuid 991 oifname != "lo" oifname != "wlan0" reject
+    }
+}

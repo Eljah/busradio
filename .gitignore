@@ -1,0 +1,14 @@
+**/target/
+.local/
+var/
+.idea/
+*.iml
+.env
+*.private.properties
+edge.properties
+signing-key.json
+*.pcm
+*.wav
+*.log
+__pycache__/
+dist/

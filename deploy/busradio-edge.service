@@ -1,0 +1,23 @@
+[Unit]
+Description=Busradio offline edge agent (RF disabled unless separately commissioned)
+After=network.target gpsd.service
+[Service]
+Type=simple
+User=busradio-edge
+Group=busradio-edge
+SupplementaryGroups=gpio audio
+WorkingDirectory=/opt/busradio
+ExecStart=/usr/bin/java -Xms32m -Xmx256m -jar /opt/busradio/busradio-edge-0.1.0-all.jar --config /etc/busradio/edge.properties
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=15
+KillMode=control-group
+StateDirectory=busradio-edge
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/busradio-edge
+[Install]
+WantedBy=multi-user.target
